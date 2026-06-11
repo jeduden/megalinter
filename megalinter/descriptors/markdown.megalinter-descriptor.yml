@@ -264,3 +264,90 @@ linters:
       vscode:
         - name: rumdl - Markdown Linter
           url: https://marketplace.visualstudio.com/items?itemName=rvben.rumdl
+  # mdsmith
+  - linter_name: mdsmith
+    is_formatter: true
+    activation_rules:
+      - type: variable
+        variable: MARKDOWN_DEFAULT_STYLE
+        expected_value: mdsmith
+        default_value: markdownlint
+    linter_text: |
+      **mdsmith** is a fast Markdown linter, formatter and data extractor shipped as a single static Go binary. Beyond line-level style, it validates document structure and cross-file integrity: broken links and anchors, per-file section schemas, file kinds, and generated sections that keep content in sync across files.
+
+      **Key Features:**
+
+      - **Single Static Binary**: One Go executable with no runtime to start; the workspace walk runs in parallel, an order of magnitude faster than Node markdownlint
+      - **Auto-Fix**: `mdsmith fix` rewrites whitespace, headings, code fences, bare URLs, list indentation, and table alignment in place, looping until edits stabilize
+      - **Cross-File Integrity**: Flags broken links and missing anchors, enforces per-file section schemas, and keeps Markdown files in the right folders
+      - **File Kinds & Schemas**: Tag each file with a kind, then validate its headings and front matter against a schema declared inline or shared via templates
+      - **Generated Sections**: `<?toc?>`, `<?catalog?>` and `<?include?>` directives rebuild tables of contents, indexes, and embedded content on fix
+      - **Conventions & Flavors**: Pin a Markdown convention to get a curated rule preset and a target renderer flavor in one switch
+      - **markdownlint Migration**: `mdsmith init --from-markdownlint` converts an existing markdownlint configuration to `.mdsmith.yml`
+      - **Layered Configuration**: Defaults, conventions, kinds, and overrides deep-merge rule by rule, with `--explain` provenance per setting
+      - **No Telemetry**: No usage analytics, no error reports, and no outbound network calls at runtime
+    linter_url: https://github.com/jeduden/mdsmith
+    linter_repo: https://github.com/jeduden/mdsmith
+    linter_spdx_license: MIT
+    linter_speed: 5
+    linter_rules_url: https://github.com/jeduden/mdsmith/tree/main/internal/rules
+    linter_rules_configuration_url: https://github.com/jeduden/mdsmith/blob/main/docs/reference/conventions.md
+    linter_rules_ignore_config_url: https://github.com/jeduden/mdsmith/blob/main/docs/reference/globs.md
+    linter_banner_image_url: https://raw.githubusercontent.com/jeduden/mdsmith/main/website/static/img/logo-lockup.svg
+    config_file_name: .mdsmith.yml
+    cli_config_arg_name: "--config"
+    cli_lint_mode: list_of_files
+    cli_lint_extra_args:
+      - "check"
+    cli_lint_extra_args_after:
+      - "--no-color"
+    cli_lint_fix_arg_name: "fix"
+    cli_lint_fix_remove_args:
+      - "check"
+    cli_version_arg_name: "version"
+    cli_lint_errors_count: regex_count
+    cli_lint_errors_regex: ":[0-9]+:[0-9]+ MDS[0-9]{3} "
+    common_linter_errors:
+      - identifier: MARKDOWN_MDSMITH_ERROR_CONFIG_PARSE
+        regex: "mdsmith: parsing config file: "
+        message: |-
+          mdsmith could not parse its configuration file. This is a YAML syntax error in `.mdsmith.yml`, most often an unclosed bracket, bad indentation, or a stray tab character.
+          Resolutions:
+            - Validate the YAML syntax of `.mdsmith.yml` with a YAML linter.
+            - Regenerate a default configuration with `mdsmith init` and re-apply your customizations.
+            - Reference docs: https://github.com/jeduden/mdsmith/blob/main/docs/reference/cli/init.md
+    test_folder: markdown_mdsmith
+    test_variables:
+      MARKDOWN_DEFAULT_STYLE: mdsmith
+    examples:
+      - "mdsmith check myfile.md"
+      - "mdsmith check --config .mdsmith.yml myfile.md myfile2.md"
+      - "mdsmith fix --config .mdsmith.yml myfile.md"
+    install:
+      apk:
+        - curl
+      dockerfile:
+        - |-
+          # renovate: datasource=github-releases depName=jeduden/mdsmith extractVersion=^v(?<version>.+)$
+          ARG MARKDOWN_MDSMITH_VERSION=0.42.0
+        - |-
+          RUN set -eu; \
+              case "$TARGETPLATFORM" in \
+                linux/amd64) ARCH=amd64 ;; \
+                linux/arm64) ARCH=arm64 ;; \
+                *) echo "unsupported platform: $TARGETPLATFORM" >&2; exit 1 ;; \
+              esac; \
+              curl --retry 5 --retry-delay 5 -fsSL -o /usr/bin/mdsmith \
+                "https://github.com/jeduden/mdsmith/releases/download/v${MARKDOWN_MDSMITH_VERSION}/mdsmith-linux-${ARCH}" && \
+              chmod +x /usr/bin/mdsmith
+    supported_platforms:
+      platform:
+        - linux/amd64
+        - linux/arm64
+    ide:
+      vim:
+        - name: mdsmith LSP for Neovim
+          url: https://github.com/jeduden/mdsmith/blob/main/docs/guides/editors/neovim.md
+      vscode:
+        - name: mdsmith
+          url: https://marketplace.visualstudio.com/items?itemName=jeduden.mdsmith

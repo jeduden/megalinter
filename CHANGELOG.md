@@ -17,6 +17,7 @@ Note: Can be used with `oxsecurity/megalinter@beta` in your GitHub Action mega-l
   - New linter descriptor property `common_linter_errors`: declare known non-lint failure patterns (config issue, remote service down, missing credentials…) and the guidance message shown to users, directly in YAML — no custom Python class needed.
 
 - New linters
+  - Add [mdsmith](https://github.com/jeduden/mdsmith) linter for Markdown — a fast single-binary Go linter and formatter covering style, document structure, and cross-file integrity, activated with `MARKDOWN_DEFAULT_STYLE: mdsmith`
 
 - Disabled linters
 
