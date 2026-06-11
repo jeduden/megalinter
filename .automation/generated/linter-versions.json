@@ -63,6 +63,7 @@
     "markdown-link-check": "3.12.2",
     "markdown-table-formatter": "1.7.0",
     "markdownlint": "0.48.0",
+    "mdsmith": "0.42.0",
     "misspell": "0.3.4",
     "mypy": "1.19.1",
     "nbqa": "1.9.1",
