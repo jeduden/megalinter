@@ -1,7 +1,9 @@
-#Fix Sample Two
+# Fix Sample Two
 
-A misaligned table sits below.
+The table below has ragged column widths. The fixer aligns
+every column to its widest cell.
 
-| a | long header |
+| Name | Description       |
 |---|---|
-| 1 | 2 |
+| one | first sample row |
+| two | second sample row    |
