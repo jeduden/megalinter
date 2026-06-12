@@ -291,6 +291,8 @@ ARG NPM_MARKDOWNLINT_CLI_VERSION=0.48.0
 ARG NPM_MARKDOWN_TABLE_FORMATTER_VERSION=1.7.0
 # renovate: datasource=pypi depName=rumdl
 ARG PIP_RUMDL_VERSION=0.2.9
+# renovate: datasource=github-releases depName=jeduden/mdsmith extractVersion=^v(?<version>.+)$
+ARG MARKDOWN_MDSMITH_VERSION=0.45.0
 # renovate: datasource=github-tags depName=skaji/cpm
 ARG PERL_PERLCRITIC_VERSION=v1.1.1
 
@@ -1046,6 +1048,16 @@ RUN curl --retry 5 --retry-delay 5 -sSL \
 # markdownlint installation
 # markdown-table-formatter installation
 # rumdl installation
+# mdsmith installation
+    && set -eu; \
+    case "$TARGETPLATFORM" in \
+      linux/amd64) ARCH=amd64 ;; \
+      linux/arm64) ARCH=arm64 ;; \
+      *) echo "unsupported platform: $TARGETPLATFORM" >&2; exit 1 ;; \
+    esac; \
+    curl --retry 5 --retry-delay 5 -fsSL -o /usr/bin/mdsmith \
+      "https://github.com/jeduden/mdsmith/releases/download/v${MARKDOWN_MDSMITH_VERSION}/mdsmith-linux-${ARCH}" && \
+    chmod +x /usr/bin/mdsmith \
 # perlcritic installation
     && curl -fsSL https://raw.githubusercontent.com/skaji/cpm/refs/tags/${PERL_PERLCRITIC_VERSION}/cpm | perl - install -g --show-build-log-on-failure --without-build --without-test --without-runtime Perl::Critic \
     && rm -rf /root/.perl-cpm

@@ -329,6 +329,11 @@
     "image": "https://avatars2.githubusercontent.com/u/1828270?s=400&v=4",
     "title": "DavidAnson/markdownlint"
   },
+  "mdsmith": {
+    "description": "fast, auto-fixing Markdown linter and formatter. Checks style, readability, structure, and cross-file integrity. - jeduden/mdsmith",
+    "image": "https://opengraph.githubassets.com/0121b0e97df971a3a31447f7ed9535a41e1320109ce3ead8ab15a0e20f6205be/jeduden/mdsmith",
+    "title": "GitHub - jeduden/mdsmith: fast, auto-fixing Markdown linter and formatter. Checks style, readability, structure, and cross-file integrity."
+  },
   "misspell": {
     "description": "Correct commonly misspelled English words in source files - client9/misspell",
     "image": "https://avatars0.githubusercontent.com/u/217179?s=400&v=4",

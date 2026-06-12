@@ -351,6 +351,7 @@
         "MARKDOWN_MARKDOWNLINT",
         "MARKDOWN_MARKDOWN_LINK_CHECK",
         "MARKDOWN_MARKDOWN_TABLE_FORMATTER",
+        "MARKDOWN_MDSMITH",
         "MARKDOWN_REMARK_LINT",
         "MARKDOWN_RUMDL",
         "OPENAPI_SPECTRAL",
@@ -16390,11 +16391,13 @@
       "description": "Style of markdown formatting to apply",
       "enum": [
         "markdownlint",
+        "mdsmith",
         "remark-lint",
         "rumdl"
       ],
       "enumNames": [
         "Markdownlint",
+        "Mdsmith",
         "Remark Lint",
         "Rumdl"
       ],

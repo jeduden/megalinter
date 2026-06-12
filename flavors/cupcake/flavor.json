@@ -52,6 +52,7 @@
         "MARKDOWN_MARKDOWNLINT",
         "MARKDOWN_MARKDOWN_TABLE_FORMATTER",
         "MARKDOWN_RUMDL",
+        "MARKDOWN_MDSMITH",
         "PHP_PHPCS",
         "PHP_PHPSTAN",
         "PHP_PSALM",
