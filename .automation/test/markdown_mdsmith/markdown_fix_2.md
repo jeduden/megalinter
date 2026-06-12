@@ -1,9 +1,9 @@
 # Fix Sample Two
 
-The table below has ragged column widths. The fixer aligns
-every column to its widest cell.
+The table below is written in compact form. The fixer pads
+every cell to prettier-style alignment.
 
-| Name | Description       |
+| Name | Description |
 |---|---|
-| one | first sample row |
-| two | second sample row    |
+| one | a short row |
+| twenty-two | a longer description here |
